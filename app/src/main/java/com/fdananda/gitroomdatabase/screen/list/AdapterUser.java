@@ -35,7 +35,8 @@ public class AdapterUser extends ArrayAdapter<User> {
         TextView textViewSurname    = view.findViewById(R.id.textViewSurname);
         TextView textViewAge        = view.findViewById(R.id.textViewAge);
 
-        textViewPosition.setText(String.valueOf(users.get(position).getId()));
+        //textViewPosition.setText(String.valueOf(users.get(position).getId()));
+        textViewPosition.setText(String.valueOf(position + 1));
         textViewName.setText(users.get(position).getName());
         textViewSurname.setText(users.get(position).getSurname());
         textViewAge.setText("(" + String.valueOf(users.get(position).getAge()) + " anos)");
