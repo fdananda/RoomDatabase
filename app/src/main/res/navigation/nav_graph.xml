@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.fdananda.gitroomdatabase.screen.list.ListFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/list_fragment">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_deleteFragment"
+            app:destination="@id/deleteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.fdananda.gitroomdatabase.screen.add.AddFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/add_fragment">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.fdananda.gitroomdatabase.screen.update.UpdateFragment"
+        android:label="Update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.fdananda.gitroomdatabase.model.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteFragment"
+        android:name="com.fdananda.gitroomdatabase.screen.delete.DeleteFragment"
+        android:label="Delete"
+        tools:layout="@layout/fragment_delete" >
+        <action
+            android:id="@+id/action_deleteFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.fdananda.gitroomdatabase.model.User" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.fdananda.gitroomdatabase.screen.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>
