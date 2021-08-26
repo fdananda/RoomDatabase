@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -21,8 +22,9 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
-    ListView listView;
-    List<User> users;
+    private ListView listView;
+    private List<User> users;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(
@@ -31,6 +33,8 @@ public class ListFragment extends Fragment {
     ) {
         View view = inflater.inflate(R.layout.list_fragment, container, false);
         listView  = view.findViewById(R.id.listViewUsers);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(view.INVISIBLE);
         users = new ArrayList<User>();
 
         GetUsersAsyncTask getUsersAsyncTask = new GetUsersAsyncTask(getActivity().getApplicationContext());
@@ -59,6 +63,12 @@ public class ListFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected ArrayList<User> doInBackground(ArrayList<User>... arrayLists) {
 
             UserDatabase userDatabase = UserDatabase.getInstance(getActivity().getApplicationContext());
@@ -73,6 +83,8 @@ public class ListFragment extends Fragment {
 
             ArrayAdapter adapter = new AdapterUser(weakReference.get().getApplicationContext(), (ArrayList<User>) users);
             listView.setAdapter(adapter);
+
+            progressBar.setVisibility(View.INVISIBLE);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
